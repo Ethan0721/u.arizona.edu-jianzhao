@@ -1,0 +1,456 @@
+<!DOCTYPE html>
+<html>
+<head>
+<link href="https://fonts.googleapis.com/css?family=Amiri|Kalam|Fjalla+One" rel="stylesheet">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js">(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-PVZ847K');</script>
+<!-- End Google Tag Manager -->
+  <meta charset="UTF-8">
+  <meta http-equiv="pragma" content="no-cache"/>
+
+  <title>Alogorithm Page</title>
+  <link rel="stylesheet" href="style.css" media="screen" type="text/css" />
+</head>
+<body>
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-PVZ847K"
+height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
+
+
+<div id = "bg"><img src="bg.jpg" alt="bg"></div>
+<div id = "header"></div>
+
+<div id="container">
+
+<div class = "text center">
+<h1>Welcome to My Blog</h1>
+<h4><i>My Name is Jian Zhao <br>
+Email: jianzhao@email.arizona.edu</h4></i> </div>
+
+<!-- Tabs container-->
+<div class="flex-tabs-container">
+  <a href="index.html" class="flex-tab-item" name = "top">Home</a>
+  <a href="alo.html" class="flex-tab-item">Algorithm</a>
+  <a href="css.html" class="flex-tab-item">CSS</a>
+  <a href="net.html" class="flex-tab-item">Network</a>
+  <a href="something.html" class="flex-tab-item">杂</a>
+</div>
+
+<section id = "flex-box-container">
+ 
+<div class="flex-algorithm-item">
+   
+    <h2><strong>Version Control</strong> <sub><i>07/26/2017</i></sub></h2><hr>
+   <code> 
+    1. History: always can see my older code history, track changes.
+    2. Collaboration: two persons working on one project, send files back and forth
+    3. Feature branches: footer and header doesn't matter which done first.
+   </code>
+   </div>
+
+ <div class="flex-algorithm-item">
+   
+    <h2><strong>Bellman-Ford Algorithm</strong> <sub><i>07/26/2017</i></sub></h2><hr>
+   <code> 
+
+
+
+    1. Bellman ford: find the shortest path from a source node to all other nodes, negative edges allowed.
+       Dijkstra's : shortest path from one node to all nodes, negative edges allowed.
+       Floyd-Warshall : Shortest path between all pairs of vertices, negative edges allowed. 
+       Negative cycles are not allowed in these three.
+
+    2. G must not have cycles of negative weight ( If the cycles of negative weight exist, 
+       then a shortest path wouldn't exist, as it would transverse the cycle an infinite times). 
+       It may have negative weight. 
+    3. If OPT(n,v) = OPT(n-1,v) for all v, then no negative cycles.
+    4. If OPT(n,v) < OPT(n-1,v) for some node v, then any shortest path from v to t contains 
+       a negative cost cycle. (proof can be done by contradication)
+    5.Detecting Negative cycles in O(mn) time:-> Add a new node say t, connect all nodes to t,
+      check if OPT(n,v) = OPT(n-1,v), if yes then no negative cycles, else exist from v to t.
+
+
+</code>
+
+ </div>
+
+
+ <div class="flex-algorithm-item">
+
+ <h2><strong>ASCII- Unique Char in A String </strong> <sub><i>06/05/2017</i></sub></h2><hr>
+ <p class = "questions">
+ Checking if the char in a string is unique. Assume there are 128 characters using ASCII.
+ </p> 
+ <p id = "alo-8-solution"><span>Show Solution</span></p>
+ <div id = "alo-block7-8">
+   <pre>
+    boolean isUniqueChar (String str){
+      if(str.length() >128) return false;
+
+      boolean [] ch = new boolean[128];
+      for(int i=0; i < str.length(); i++){
+        int val = str.charAt(i);
+        if(ch[val]) 
+          return false;
+        ch[val] = true;
+     }
+     return true;
+    }
+    this time complexity is O(n) n is the number of characters in this string, 
+    however, I have already assumed there are no more than 128 chars. 
+   </pre>
+ </div>
+ </div>
+
+
+
+
+ <div class="flex-algorithm-item">
+
+ <h2><strong>Java-猴子吃桃，水仙花数，素数 </strong> <sub><i>06/02/2017</i></sub></h2><hr>
+<p class = "questions">
+ 1. 猴子第一天采N个桃子，吃了一半又多吃了一个，第二天又吃了剩下的一半又多吃了一个，第10天时候发现只剩下1个桃子，问第一天一共采了几个桃子.
+ <br>2. 水仙花数指的是：一个数每一位数的总长度的指数等于这个数的值，这个书就是水仙花数。for emaple：153是， 因为1 power 3 + 5 power 3 + 3 power 3 = 153.
+ <br>3. 求素数， 一个数除了1和自己本身不能被其他数整除就是素数。
+</p> 
+<p id = "alo-7-solution"><span>Show Solution</span></p>
+<div id = "alo-block6-7">
+<pre>
+1.猴子吃桃： 
+int sum=1;
+    int i=0;
+    while(i<9)
+    {
+      sum = (sum+1)*2;
+      i++;
+    } 
+2.水仙花数：
+    int temp = value;
+    int count =0; 
+    int reminder=0;
+    int sum =0;
+    ArrayList &lt;Integer&gt; list=new ArrayList &lt;Integer&gt;();
+    while(value != 0)
+    {
+      reminder = value%10;
+      list.add(reminder);
+      value = value/10;
+      count++;
+    }
+    for(int i = 0; i < count; i++){
+      sum = (int) (Math.pow(list.get(i), count) +sum); 
+    }   
+    if(sum == temp)
+      return true;
+    return false;
+I believe there must exist a better solution, since I used two loops and extra space. 
+Logic is very simple, Count used for get the length of the number. Arrylist used for 
+store the digits. 
+3. 判断一个数是否是素数，一个被证明过的理论是，从2起到<=此数的开方若都不能被整除那么就是素数。一个for loop 就可解。
+</pre>
+</div></div>
+
+ <div class="flex-algorithm-item">
+
+ <h2><strong>Algorithm- Implement Random Number</strong> <sub><i>05/31/2017</i></sub></h2><hr>
+ <p class = "questions">
+ Given a function random(5) range is from 1-5, find random(13), random 13 should be one of the number between 1-13. 
+ </p> 
+ <p id = "alo-6-solution"><span>Show Solution</span></p>
+ <div id = "alo-block5-6">
+ Ideas: build a simple 2D array, size is 5*5, insert values start from 1 to 13, the rest of be 0s.
+<pre>
+      int val =0;
+      while(val==0)
+    {
+        x = random(5);
+        y = random(5);
+        val = array[x][y];
+    } 
+      return val;
+ </pre>
+ <p>if not consider about each number has same possibility occurs, I can simply use random(5)+random(5)+random(5) -2;
+In this way the value I got is 1's posibility is 1/5*1/5*1/5, but I got 2's posibility is making sum random(5)+random(5)+random(5) be 4, we have 1,1,2, 1,2,1 2,1,1. Thus 3 times than 1's. So we can get all the numers in this range but can't promise the posibilities of these numbers.</p>
+ </div>
+ </div>
+
+
+<div class="flex-algorithm-item">
+  <h2><strong>Leetcode#1-Two Sum</strong> <sub><i>04/27/2017</i></sub></h2><hr>
+   <p class = "questions">Case 1: Given a <strong>sorted</strong> array, return true if any two numbers sum up equals the target value. Otherwise return false. For example: <ul><li>[1, 2, 3, 9] sum = 8 false</li><li> [1, 2, 5, 5] sum = 10 true</li></ul></p> <p id = "alo-1-solution"><span>Show Solution</span></p>
+
+   <div id = "alo-block1-1">
+    <xmp> 
+    private static boolean twoSum(int[] nums, int target) 
+      {
+        int left = 0; 
+        int right = nums.length-1;
+        int value =0;
+        while(left<right)
+        {
+          value = nums[left] + nums[right];
+          if(value == target){
+           // System.out.println("position is "+ left+","+right);
+          return true;  
+          }
+         else if (value < target) 
+            left++; 
+         else 
+            right--;
+        } 
+
+      return false; 
+      }
+    </xmp> </div>
+
+   <p class = "questions">Case2: The given array is <strong>not sorted</strong>, return true if any two numbers sum up equals the target value, otherwise return false. For example: <ul><li>[3, 2, 4, 9] sum = 8 false</li><li> [5, 2, 4, 8] sum = 9 true</li></ul></p> <p id ="alo-2-solution"><span>Show Solution</span></p>
+
+   <div id = "alo-block1-2">
+    <xmp>
+    private static boolean twoSum_UnSortedArray(int[] nums, int target) 
+      {
+        HashSet<Integer> hs = new HashSet<Integer>();
+        for(int i = 0; i<nums.length;i++)
+        {
+          if(hs.contains(nums[i]))
+            return true;
+      
+          hs.add(target-nums[i]);
+        }
+
+        return false;
+      }
+
+    </xmp><p>Here using HashSet, the property of HashSet is you can not add two same value into the HashSet, thus we always add the complement of the array value into the hashset and check if the hashset contains the incoming value. If it contains it means there is a pair sum up equal to the target, otherwise there is no pairs. Take a example of array [5,2,4,8] target 9. We first check if hs contains 5, since now hs is empty, skip the if statement, add 4 which is 9-5 into hs, the second element is 2, which is not exist in hs, thus we add 7 in. Now the hs  has 4 and 7. The fowllowng value is 4, we found 4 does in the hashset thus we fond a pair and return true.</p> 
+    <p>Note: In this way you have to import java.util.HashSet;</p>
+    <p>Plus: use HashSet check duplicate Array is efficient: it cost Ω(nlogn)
+       <pre> 
+      HashSet&lt;String&gt; store = new HashSet&lt;&gt;();
+      for (String name : arr) {
+       if (store.add(name) == false) 
+       { 
+        System.out.println("A duplicate element in array is: " + name); 
+       }
+       </pre>
+    </p>
+  </div>
+</div>
+<!--     END of Algorithm Block1</div>
+ -->    
+    <div class="flex-algorithm-item">
+    <h2><strong> Algorithm-Find the Second Smallest</strong> <sub><i>05/20/2017</i></sub></h2><hr>
+    <p class = "questions">Find the second smallest value in the given array For example, [4, 23, 2, 5, 6, -5] should return 2</p><p id = "alo-0-solution"><span>Show Solution</span></p>
+    
+    <div id = "alo-block0-0">
+
+    <pre>
+      int smallest = Integer.MAX_VALUE;
+      int secondSmallest = Integer.MAX_VALUE;
+      for (int i = 0; i < elements.length; i++) {
+          if (elements[i] < smallest) {
+              secondSmallest = smallest;
+              smallest = elements[i];
+              count1=i;
+          } else if (elements[i] < secondSmallest) {
+              secondSmallest = elements[i];
+              count2=i;
+             }
+      }
+     System.out.println("smallest:"+smallest);
+     System.out.println("Second smallest:"+secondSmallest);
+}
+    </pre>
+    </div>
+    </div>
+  <!--          BLOCK    3  -->
+
+  <div class="flex-algorithm-item">
+  <h2><strong>Leetcode#26-Remove Duplicates From Array</strong> <sub><i>05/21/2017</i></sub></h2><hr>
+   <p class = "questions">Given a sorted array, remove the duplicates in place such that each element appear only once and return the new length.</p> <p id = "alo-3-solution"><span>Show Solution</span></p>
+
+  <div id = "alo-block2-3">
+  <xmp>
+    import java.util.*;     
+    public int removeDuplicates(int[] nums) {
+      HashSet<Integer> hs = new HashSet<Integer>();
+      int j =0;
+      for(int i =0; i<nums.length; i++){
+         if(!hs.contains(nums[i]) )
+            {
+              nums[j] = nums[i];
+              hs.add(nums[i]);
+              j++;
+            }
+           
+          }
+      
+           return hs.size();
+        }
+  </xmp>
+</div>
+</div>
+
+<!--          BLOCK    4  -->
+<div class="flex-algorithm-item">
+
+<h2><strong>Leetcode#27-Remove Element</strong> <sub><i>05/21/2017</i></sub></h2><hr>
+<p class = "questions">Given an array and a value, remove all instances of that value in place and return the new length. Do not allocate extra space for another array, you must do this in place with constant memory. The order of elements can be changed. It doesn't matter what you leave beyond the new length.
+</p><p id = "alo-4-solution"><span>Show Solution</span></p>
+<div id = "alo-block3-4">
+<xmp>
+ public int removeElement(int[] nums, int val) {
+   int length = nums.length;
+   int count =0; <i class = "comment">// the new nums array index</i>
+        for(int i=0; i< length; i++)
+        {
+            if(nums[i] != val){    
+                nums[count]=nums[i];          
+                count++; 
+            }
+        }
+        
+    return count;}
+  </xmp>
+</div>
+</div>
+
+
+<!--          BLOCK    5       -->
+
+ <div class="flex-algorithm-item">
+ <h2><strong>Leetcode#66 Plus One</strong> <sub><i>05/22/2017</i></sub></h2><hr>
+ <p class = "questions">
+ Given a non-negative integer represented as a non-empty array of digits, plus one to the integer. You may assume the integer do not contain any leading zero, except the number 0 itself.
+ </p> 
+ <p id = "alo-5-solution"><span>Show Solution</span></p>
+ <div id = "alo-block4-5">
+ <xmp>
+  public int[] plusOne(int[] digits) {
+        int length = digits.length;
+        int i=0;
+        for(i = length-1; i>=0; i--){
+            if(digits[i] ==9) // only nine can change to be 0
+                digits[i] =0; 
+            else{  
+             digits[i]++; //add 1 on the current digit position
+             return digits; //return since no carry will occur in the left
+            }
+        }
+        //if all elements are 9, create a new length+1 array,
+       //then add 1 on the first position.
+            int [] newarray = new int [length+1]; 
+            newarray[0] = 1;//since the first element must be 1
+            return newarray;
+    }   
+    Note: int [] newarray = new int [length+1];  
+    will make the whole array elements be 0. 
+ </xmp>
+ </div>
+ </div>
+</section>
+ 
+</div>
+<button onclick="topFunction()" id="myBtn" title="Go to top">Top</button>
+
+<!-- <footer>
+  <p>
+  <a href="index.html" class="flex-tab-item">Home|</a>
+  <a href="alo.html" class="flex-tab-item">Algorithm|</a>
+  <a href="css.html" class="flex-tab-item">CSS|</a>
+  <a href="net.html" class="flex-tab-item">Network|</a>
+  <a href="something.html" class="flex-tab-item">杂</a>
+  <br>Posted by: Jian Zhao | Contact information: jianzhao@email.arizona.edu
+  </p>
+</footer>
+ -->
+<script>
+
+// $(document).ready(function(){
+//     $('a').on('click', function(){
+//     $('a').removeClass('selected');
+//     $(this).addClass('selected');
+// });
+
+    var alo = document.getElementsByClassName("flex-algorithm-item");
+
+
+    $("#alo-block0-0").hide();
+    $("#alo-block1-1").hide();
+    $("#alo-block1-2").hide();
+    $("#alo-block2-3").hide();
+    $("#alo-block3-4").hide();
+    $("#alo-block4-5").hide();
+    $("#alo-block5-6").hide();
+    $("#alo-block6-7").hide();
+    $("#alo-block7-8").hide();
+    $("#alo-8-solution").click(function(){
+        $("#alo-block7-8").slideToggle("slow");
+    });
+    $("#alo-0-solution").click(function(){
+        $("#alo-block4-5").slideToggle("slow");
+    });
+    $("#alo-1-solution").click(function(){
+        $("#alo-block1-1").slideToggle("slow");
+    });
+    $("#alo-2-solution").click(function(){
+        $("#alo-block1-2").slideToggle("slow");
+    });
+    $("#alo-3-solution").click(function(){
+        $("#alo-block2-3").slideToggle("slow");
+    });
+    $("#alo-4-solution").click(function(){
+        $("#alo-block3-4").slideToggle("slow");
+    });
+     $("#alo-5-solution").click(function(){
+        $("#alo-block4-5").slideToggle("slow");
+    });
+    $("#alo-0-solution").click(function(){
+        $("#alo-block0-0").slideToggle("slow");
+    });
+    $("#alo-6-solution").click(function(){
+        $("#alo-block5-6").slideToggle("slow");
+    });
+    $("#alo-7-solution").click(function(){
+        $("#alo-block6-7").slideToggle("slow");
+    });
+
+
+    window.onscroll = function() {scrollFunction()};
+
+    function scrollFunction() {
+    if (document.body.scrollTop > 1200) {
+        document.getElementById("myBtn").style.display = "block";
+    } else {
+        document.getElementById("myBtn").style.display = "none";
+    }
+}
+
+// When the user clicks on the button, scroll to the top of the document
+function topFunction() {
+    document.body.scrollTop = 0;
+    document.documentElement.scrollTop = 0;
+}
+
+</script>
+
+<!-- <div class="flex-algorithm-item">
+
+  <h2><strong>Leetcode#66-</strong> <sub><i>05/22/2017</i></sub></h2><hr>
+   <p class = "questions">
+
+</p> <p id = "alo-#-solution"><span>Show Solution</span></p>
+  <div id = "alo-block#-#">
+  <xmp>
+  </xmp>
+</div>
+</div> -->
+
+
+
+
+</body>
+</html>

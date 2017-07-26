@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html>
+<head>
+<link href="https://fonts.googleapis.com/css?family=Amiri|Kalam|Fjalla+One" rel="stylesheet">
+
+<!-- End Google Tag Manager -->
+  <meta charset="UTF-8">
+  <meta http-equiv="pragma" content="no-cache"/>
+
+  <title>Home page</title>
+  <link rel="stylesheet" href="style.css" media="screen" type="text/css" />
+</head>
+<body>
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-PVZ847K"
+height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
+
+
+<div id = "bg"><img src="bg.jpg" alt="bg"></div>
+<div id = "header"></div>
+
+<div id="container">
+
+<div class = "text center">
+<h1>Welcome to My Blog</h1>
+<h4><i>My Name is Jian Zhao <br>
+Email: jianzhao@email.arizona.edu</h4></i> </div>
+
+<!-- Tabs container-->
+<div class="flex-tabs-container">
+  <a href="index.html" class="flex-tab-item">Home</a>
+  <a href="alo.html" class="flex-tab-item">Algorithm</a>
+  <a href="css.html" class="flex-tab-item">CSS</a>
+  <a href="net.html" class="flex-tab-item">Network</a>
+  <a href="something.html" class="flex-tab-item">杂</a>
+</div>
+
+  <section id = "flex-box-container">
+   
+<!-- CSS block1 Start--><div class="flex-css-item">
+  <h2><strong>CSS-Multiple Classes for Single Element</strong> <sub><i>05/19/2017</i></sub></h2>
+  <hr> 
+      <style>
+  .class1{
+      background-color:red;
+    }
+    .class2{
+      color:yellow;
+    }
+  </style>
+
+<button class="class1 class2">button</button><p>The above button used two classes on one single button element, what I am thinking this is useful is, for example, if I have ten buttons, they all have red background color, but 3 has blue text, 5 has yellow text, and 2 has orange text. This way is easier to implement.</p>
+
+<xmp>
+<style>
+  .class1{ background-color:red; }
+  .class2{ color:yellow; }
+</style>
+<button class="class1 class2">button</button>
+</xmp></div><!-- CSS block1 END -->
+
+
+
+<!-- CSS block2 Start --><div class="flex-css-item">
+<h2><strong>CSS-Samll Tricks</strong><sub><i>05/19/2017</i></sub></h2> <ol> <li><hr> 
+Deleting the blue outline when you take image as a button in CSS.   Using <xmp> outline: none;</xmp>Now Apple website has this problem. Most of the images after you clicked will show the blue outline. Check it out: see when they can change it or they want to change it. https://support.apple.com/</li><br><li> Deleting the Bullets when using &lt;li&gt; and &lt;ul&gt; 
+<xmp> 
+<ul>
+  list-style-type: none;
+</ul>
+</xmp>
+<p>When drawing bloks or making navigator, have to implement.</p>
+</div>
+
+
+<!-- <div class="flex-css-item">
+   <h3>Add Comment:</h3>
+  <div class = "Add-Comment">
+
+  <form action = "controller.php" method = 'post'>
+   <textarea id = "rconer" name = "quote" cols = "60" rows ='10' placeholder="Leave your words"></textarea>
+  <input type = "submit" value = "Post it" name = "submit">
+
+  </form>
+  </div>
+</div> -->
+</section>
+
+</div>
+
+
+
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js">(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-PVZ847K');</script>
+<script>
+$(document).ready(function(){
+    $('a').on('click', function(){
+    $('a').removeClass('selected');
+    $(this).addClass('selected');
+});
+</script>
+
+
+
+
+</body>
+</html>

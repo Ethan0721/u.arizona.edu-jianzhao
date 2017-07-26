@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html>
+<head>
+<link href="https://fonts.googleapis.com/css?family=Amiri|Kalam|Fjalla+One" rel="stylesheet">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js">(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-PVZ847K');</script>
+<!-- End Google Tag Manager -->
+  <meta charset="UTF-8">
+  <meta http-equiv="pragma" content="no-cache"/>
+
+  <title>Network page</title>
+  <link rel="stylesheet" href="style.css" media="screen" type="text/css" />
+</head>
+<body>
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-PVZ847K"
+height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
+
+
+<div id = "bg"><img src="bg.jpg" alt="bg"></div>
+<div id = "header"></div>
+
+<div id="container">
+<div class = "text center">
+<h1>Welcome to My Blog</h1>
+<h4><i>My Name is Jian Zhao <br>
+Email: jianzhao@email.arizona.edu</h4></i> </div>
+
+<!-- Tabs container-->
+<div class="flex-tabs-container">
+  <a href="index.html" class="flex-tab-item">Home</a>
+  <a href="alo.html" class="flex-tab-item">Algorithm</a>
+  <a href="css.html" class="flex-tab-item">CSS</a>
+  <a href="net.html" class="flex-tab-item">Network</a>
+  <a href="something.html" class="flex-tab-item">杂</a>
+</div>
+<!-- Box container-->
+
+<section id = "flex-box-container">
+
+  <div class="flex-network-item">
+
+<h2><strong>TCP</strong> <sub><i>05/27/2017</i></sub></h2>
+<hr> 
+<pre>
+Part1  Simply implement TCP Server and Client Application<br>
+  
+  1. Understanding Socket:
+
+  * The point where a local application process attaches to the network.
+  * An interface between an application and the network.
+  * An application creates the socket.
+
+
+  2. Create a Socket in C:
+  int sockfd = socket(address_family, type, protocol);
+ 
+  For Socket family:
+    -PF_INET: denotes the Internet family
+    -PF_UNIX: denotes the Unix pipe facility 
+    -PF_PACKET: denotes direct access to the network interface
+  For Socket type:
+    -SOCKS_STREAM is used to denote a byte stream such as TCP
+    -SOCK_DGRAM is an alternative that denotes a message oriented service, 
+                such as that provided by UDP
+  For protocol: 
+    Usually only one protocol exists under particular domain/type, thus use 0;
+  Thus we can write like this: 
+  int sockfd = socket (PF_INET, SOCK_STREAM, 0);
+  int sockfd = socket (PF_INET, SOCK_DRGEAM, 0);
+  Three requirements in server: 
+  1/int bind (int socket, struct sockaddr *address, int addr_len)
+  2/int listen (int socket, int backlog)
+  3/int accept (int socket, struct sockaddr *address,int *addr_len) 
+  
+Program: The below Client and Server program achieved: establish Client and 
+          Sever connection, when client sends message to server, server 
+          receive the message and shows the message length and the message content.
+Note: the last newline character should not be counted. You should not transmit the 
+      newline or null character; only transmit the text of user input. The maximum 
+      text length is 1024 bytes.
+Running:1. User starts the server program on ServerVM,./server sport
+            * where sport is the port to which the server program will bind. 
+              It should use address INADDR_ANY.
+        2. User starts the client program on ClientVM  ./client sip sport
+        where sip and sport is the server IP (eth1) and port number. The client 
+        establishes a TCP connection with the server.
+
+Client.c:
+#include &lt;stdio.h&gt;
+#include &lt;sys/socket.h&gt;
+#include &lt;netinet/in.h&gt;
+#include &lt;string.h&gt;
+#include &lt;stdlib.h&gt;
+
+int main(int argc, char *argv[]){
+  int clientSocket; 
+  char str[1024]; <i class = "comment">//  string buffer</i>
+  struct sockaddr_in serverAddr;  <i class = "comment">// 32 bit IP address </i>
+  serverAddr.sin_family = AF_INET; <i class = "comment"> // AF_INET or PF_INET, AF = Address Family.</i>
+  serverAddr.sin_port = htons(port); <i class = "comment">// htons or htonl when writing into a packet</i>
+  serverAddr.sin_addr.s_addr = inet_addr(argv[1]); <i class = "comment">// address conversion</i>
+  int port = atoi(argv[2]); <i class = "comment">//convert the string to int</i>
+  clientSocket = socket(AF_INET, SOCK_STREAM, 0); <i class = "comment">// create socket</i>
+  <i class = "comment">//Initialize the structure with zeros</i>
+  memset(serverAddr.sin_zero, '\0', sizeof serverAddr.sin_zero);
+  <i class = "comment">//Client invokes, doest not return until TCP has successfully established a connection</i>
+  connect(clientSocket, (struct sockaddr *) &amp;serverAddr, sizeof(serverAddr));
+  <i class = "comment">// infinite loop client send meesage to server</i>
+  while(1){
+    if(fgets(str, 1023, stdin) == NULL)
+      break;
+    else
+      str[strcspn(str, "\n")] = 0; <i class = "comment">//make last character next be 0</i>
+      send(clientSocket, str, strlen(str), 0); <i class = "comment">// send the string buffer </i>
+  }
+  close(clientSocket);
+  return 0;
+}
+
+Server.c 
+
+#include &lt;stdio.h&gt;
+#include &lt;sys/socket.h&gt;
+#include &lt;netinet/in.h&gt;
+#include &lt;string.h&gt;
+#include &lt;stdlib.h&gt;
+
+int main(int argc, char * argv[]){
+    int welcomeSocket, newSocket;
+    char buffer[1024];
+    struct sockaddr_in serverAddr, clientAddr;
+    int addr_size;
+    int port = atoi(argv[1]);
+    welcomeSocket = socket(AF_INET, SOCK_STREAM, 0);
+    serverAddr.sin_family = AF_INET;
+    serverAddr.sin_port = htons(port);
+    serverAddr.sin_addr.s_addr = htonl(INADDR_ANY);
+    memset(&amp;(serverAddr.sin_zero), '\0', 8); <i class = "comment"> // above are very similar to client</i>
+    <i class = "comment">// bind the socket to a local IP address and port</i>
+    bind(welcomeSocket, (struct sockaddr *) &amp;serverAddr, sizeof(struct sockaddr)); 
+    <i class = "comment">// listen: usually use 5</i>
+    if(listen(welcomeSocket,5)==0)
+        printf("Listening\n");
+    <i class = "comment">// prepare to accept connection</i>
+    newSocket = accept(welcomeSocket, (struct sockaddr *) &amp;clientAddr, &amp;addr_size);
+
+    int len;
+    while(1){
+        addr_size = sizeof clientAddr;
+        <i class = "comment">// get the length of the message, check if valid</i>
+        if( (len = recv(newSocket, buffer, 1024,0)) > 0 ){ 
+            printf("(Server) Length of Payload: %d\n", len); 
+            buffer[len] = '\0'; 
+            printf("(Server) Payload: %s\n", buffer ); 
+        }
+        else
+            break;
+        }
+    printf("Connection ends\n");
+    close(welcomeSocket);
+    return 0;
+}
+</pre>
+</div>
+</section><!-- end of container  div -->
+
+</div>
+
+
+
+<!-- <footer>
+  <p>
+  <a href="index.html" class="flex-tab-item">Home|</a>
+  <a href="alo.html" class="flex-tab-item">Algorithm|</a>
+  <a href="css.html" class="flex-tab-item">CSS|</a>
+  <a href="net.html" class="flex-tab-item">Network|</a>
+  <a href="something.html" class="flex-tab-item">杂</a>
+  <br>Posted by: Jian Zhao | Contact information: jianzhao@email.arizona.edu
+  </p>
+</footer> -->
+
+
+</body>
+</html>
